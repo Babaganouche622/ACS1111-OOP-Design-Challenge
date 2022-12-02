@@ -8,8 +8,8 @@ class Player(Character):
     '''
     Represents the player's ship. Inherits GameObject -> Character -> Player
     '''
-    def __init__(self, health, move_speed, fire_rate, projectile_speed, lives, x, y, image):
-        super().__init__(health, move_speed, fire_rate, projectile_speed, x, y, image)
+    def __init__(self, health, move_speed, fire_rate, damage, projectile_speed, lives, x, y, image):
+        super().__init__(health, move_speed, fire_rate, damage, projectile_speed, x, y, image)
         self.lives = lives
 
     def move(self, pressed_keys):
@@ -26,7 +26,7 @@ class Player(Character):
         '''
         Heal the character for the specified amount
         '''
-        self.health += amount
+        self._health += amount
 
     def shoot(self, pressed_keys):
         '''

@@ -10,7 +10,9 @@ class GameObject(pygame.sprite.Sprite):
         super(GameObject, self).__init__()
         self.x = x
         self.y = y
+        self.surf = pygame.image.load(image)
         self.rect = self.surf.get_rect()
+        
 
     def render(self, screen):
         self.rect.x = self.x
