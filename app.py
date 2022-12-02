@@ -23,6 +23,7 @@ TODO we will start by building out the basic game board functionality
 import pygame
 from pygame.locals import *
 from pygame import mixer
+from parts.player import Player
 # from sprites.character import *
 
 """Initialize Pygame"""
@@ -58,6 +59,7 @@ music = True
 player_score = 0
 player_powerup = False
 
+player2 = Player(x=50, y=50, image="spacey_images/x-wing-game-fighter-star-wars-x-wing-sprite-11563481441ztsmbpzlrh.png", health=500, move_speed=10, fire_rate=1, damage=1, projectile_speed=10, lives=3)
 while running:
     """This is where we check for exiting the game."""
     for event in pygame.event.get():
@@ -75,8 +77,8 @@ while running:
 
 
     """This is where we will load our game music"""
-    if music:
-        music = play_music("spacey_sounds/mixkit-retro-video-game-bubble-laser-277.wav")
+    #if music:
+     #   music = play_music("spacey_sounds/mixkit-retro-video-game-bubble-laser-277.wav")
 
     """
     TODO Here down we will have the logic of the game actually being played
@@ -85,7 +87,9 @@ while running:
     TODO The player will lose lives.
     TODO The game will end.
     """
-
+    player2.render(screen)
+    keys = pygame.key.get_pressed()
+    player2.move(keys)
 
 
 
