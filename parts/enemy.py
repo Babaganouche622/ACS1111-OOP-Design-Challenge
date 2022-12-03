@@ -9,6 +9,8 @@ class Enemy(Character):
     '''
     Class representing an enemy ship.
     '''
+    def __init__(self, health, move_speed, fire_rate, damage, projectile_speed, x, y, image, default_image_size=(100,100)):
+        super().__init__(health, move_speed, fire_rate, damage, projectile_speed, x, y, image, default_image_size)
     def shoot(self):
         '''
         Randomy determines if a shot should be fired, with higher fire rate increasing
@@ -18,4 +20,5 @@ class Enemy(Character):
         '''
         random_number = randint(0, 100)
         if random_number < self._fire_rate:
-            super().shoot()
+            return super().shoot("spacey_images/enemy_bullet.png")
+            

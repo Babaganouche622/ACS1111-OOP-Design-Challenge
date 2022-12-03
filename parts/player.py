@@ -8,8 +8,8 @@ class Player(Character):
     '''
     Represents the player's ship. Inherits GameObject -> Character -> Player
     '''
-    def __init__(self, health, move_speed, fire_rate, damage, projectile_speed, lives, x, y, image):
-        super().__init__(health, move_speed, fire_rate, damage, projectile_speed, x, y, image)
+    def __init__(self, health, move_speed, fire_rate, damage, projectile_speed, lives, x, y, image, default_image_size=(100,100)):
+        super().__init__(health, move_speed, fire_rate, damage, projectile_speed, x, y, image, default_image_size)
         self.lives = lives
 
     def move(self, pressed_keys):
@@ -33,4 +33,4 @@ class Player(Character):
         Shoots when the spacebar is pressed.
         '''
         if pressed_keys[pygame.K_SPACE]:
-            super().shoot()
+            return super().shoot("spacey_images/player_bullet.png")
