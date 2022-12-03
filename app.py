@@ -24,6 +24,9 @@ import pygame
 from pygame.locals import *
 from pygame import mixer
 from parts.player import Player
+from parts.enemy import Enemy
+import random
+from parts.projectile import Projectile
 # from sprites.character import *
 
 """Initialize Pygame"""
@@ -35,7 +38,8 @@ mixer.init()
 fake_screen = pygame.display.set_mode([1920, 1080], HWSURFACE | DOUBLEBUF | RESIZABLE)
 screen = fake_screen.copy()
 # TODO Load background image here
-background = pygame.image.load("spacey_images/space-background-with-stars-vector-illustration_97886-319.webp")
+background_image_size = (1920, 1080)
+background = pygame.transform.scale((pygame.image.load("spacey_images/milky-way-2695569__480.jpeg")), background_image_size)
 
 clock = pygame.time.Clock()
 
@@ -59,7 +63,9 @@ music = True
 player_score = 0
 player_powerup = False
 
-player2 = Player(x=50, y=50, image="spacey_images/x-wing-game-fighter-star-wars-x-wing-sprite-11563481441ztsmbpzlrh.png", health=500, move_speed=10, fire_rate=1, damage=1, projectile_speed=10, lives=3)
+player2 = Player(x=50, y=650, image="spacey_images/x_wing.png", health=500, move_speed=10, fire_rate=1, damage=1, projectile_speed=10, lives=3)
+
+enemies = []
 while running:
     """This is where we check for exiting the game."""
     for event in pygame.event.get():
@@ -74,11 +80,23 @@ while running:
     screen.fill((0, 0, 0))
     screen.blit(background, [0, 0])
     fake_screen.blit(pygame.transform.scale(fake_screen, screen.get_rect().size), (0, 0))
-
+    if new_battle:
+        # music = play_music("Battle-Game-Music/Fight.mp3")
+        number_enemies = random.randint(1, 20)
+        while number_enemies > 0:
+            enemies.append(Enemy(x=50, y=50, image="spacey_images/tie_fighter.png", health=10, move_speed=10, fire_rate=1, damage=1, projectile_speed=10))
+            number_enemies -= 1
+        x = 50
+        for enemy in enemies:
+            enemy.move(x, 50)
+            x += 100
+        new_battle = False
+        music = True
 
     """This is where we will load our game music"""
-    #if music:
-     #   music = play_music("spacey_sounds/mixkit-retro-video-game-bubble-laser-277.wav")
+    if music:
+       play_music("spacey_sounds/03 In-Game Ambience.mp3")
+       music = False
 
     """
     TODO Here down we will have the logic of the game actually being played
@@ -87,11 +105,15 @@ while running:
     TODO The player will lose lives.
     TODO The game will end.
     """
+    for entity in enemies:
+        entity.render(screen)
     player2.render(screen)
     keys = pygame.key.get_pressed()
     player2.move(keys)
-
-
+    player2.shoot(keys)
+    for enemy in enemies:
+        enemy.shoot()
+    # Projectile.move()
 
 
 

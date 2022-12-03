@@ -9,20 +9,20 @@ class Character(GameObject):
     '''Character class; parent class for Player and Enemy classes. Extends GameObject class.
     PROJECTILE_SPEED should be positive for instances of player, negative for instances of enemy.
     '''
-    def __init__(self, health, move_speed, fire_rate, damage, projectile_speed, x, y, image):
-        super().__init__(x, y, image)
+    def __init__(self, health, move_speed, fire_rate, damage, projectile_speed, x, y, image, default_image_size):
+        super().__init__(x, y, image, default_image_size)
         self._health = health # protected, only needs to be directly accessed within class and children
         self._move_speed = move_speed 
         self._fire_rate = fire_rate
         self._damage = damage
         self._projectile_speed = projectile_speed
 
-    def shoot(self):
+    def shoot(self, image_path):
         '''
         Creates a new projectile object with projectile_speed and initial
         position at the same position as the character and returns it
         '''
-        shot = Projectile(self._projectile_speed, self._damage, self.x, self.y, image='TODO:Projectile Image')
+        shot = Projectile(self._projectile_speed, self._damage, self.x, self.y, image=image_path)
         return shot
 
     def set_move_speed(self, new_move_speed):
