@@ -20,4 +20,5 @@ class Enemy(Character):
         '''
         random_number = randint(0, 100)
         if random_number < self._fire_rate:
-            super().shoot("spacey_images/enemy_bullet.png")
+            return super().shoot("spacey_images/enemy_bullet.png")
+            

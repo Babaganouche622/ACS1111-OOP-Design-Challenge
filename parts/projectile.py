@@ -17,4 +17,5 @@ class Projectile(GameObject):
         Override the inherited move method; projectiles only move in a straight
         line along the y-axis. Public method as will be called by game loop.
         '''
-        self.y += 1
+        self.y += self.__speed
+        

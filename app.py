@@ -63,9 +63,11 @@ music = True
 player_score = 0
 player_powerup = False
 
-player2 = Player(x=50, y=650, image="spacey_images/x_wing.png", health=500, move_speed=10, fire_rate=1, damage=1, projectile_speed=10, lives=3)
+player2 = Player(x=50, y=650, image="spacey_images/x_wing.png", health=500, move_speed=10, fire_rate=1, damage=1, projectile_speed=-10, lives=3)
 
 enemies = []
+projectiles = []
+
 while running:
     """This is where we check for exiting the game."""
     for event in pygame.event.get():
@@ -84,7 +86,7 @@ while running:
         # music = play_music("Battle-Game-Music/Fight.mp3")
         number_enemies = random.randint(1, 20)
         while number_enemies > 0:
-            enemies.append(Enemy(x=50, y=50, image="spacey_images/tie_fighter.png", health=10, move_speed=10, fire_rate=1, damage=1, projectile_speed=10))
+            enemies.append(Enemy(x=50, y=50, image="spacey_images/tie_fighter.png", health=10, move_speed=10, fire_rate=2, damage=1, projectile_speed=10))
             number_enemies -= 1
         x = 50
         for enemy in enemies:
@@ -110,9 +112,20 @@ while running:
     player2.render(screen)
     keys = pygame.key.get_pressed()
     player2.move(keys)
-    player2.shoot(keys)
+
+    player_shot = player2.shoot(keys)
+    if isinstance(player_shot, Projectile):
+        projectiles.append(player_shot)
+    
     for enemy in enemies:
-        enemy.shoot()
+        shot = enemy.shoot()
+        if isinstance(shot, Projectile):
+            projectiles.append(shot)
+    
+    for projectile in projectiles:
+        print(projectile)
+        projectile.render(screen)
+        projectile.move()
     # Projectile.move()
 
 

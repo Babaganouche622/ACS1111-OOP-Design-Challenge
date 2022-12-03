@@ -33,4 +33,4 @@ class Player(Character):
         Shoots when the spacebar is pressed.
         '''
         if pressed_keys[pygame.K_SPACE]:
-            super().shoot("spacey_images/player_bullet.png")
+            return super().shoot("spacey_images/player_bullet.png")
