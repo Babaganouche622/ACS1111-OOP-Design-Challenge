@@ -22,7 +22,7 @@ class Character(GameObject):
         Creates a new projectile object with projectile_speed and initial
         position at the same position as the character and returns it
         '''
-        shot = Projectile(self._projectile_speed, self._damage, self.x, self.y, image=image_path)
+        shot = Projectile(self._projectile_speed, self._damage, self._x, self._y, image=image_path)
         return shot
 
     def set_move_speed(self, new_move_speed):

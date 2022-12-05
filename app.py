@@ -1,24 +1,3 @@
-"""
-Pygame, import all things pygame, build the screen
-
-class1 = GameObject => Character => Player
-                                 => Enemy
-                    => Items
-
-methods, just print statements
-
--Spaceship
-    health, lives, deaths, score, powerups
--enemies
-    health, lives, deaths,
--powerups
-
--score counter, death counter, lives counter, music, sound effects, bullet classes, shooting mechanics
-
-
-
-TODO we will start by building out the basic game board functionality
-"""
 """Import all the dependancies"""
 import pygame
 from pygame.locals import *
@@ -42,9 +21,6 @@ background_image_size = (1920, 1080)
 background = pygame.transform.scale((pygame.image.load("spacey_images/milky-way-2695569__480.jpeg")), background_image_size)
 
 clock = pygame.time.Clock()
-
-
-# TODO Here we load all the enemie's, player's, item's disigns into their classes.
 
 """This is the method run to change the song during runtime"""
 def play_music(song):
@@ -123,7 +99,6 @@ while running:
             projectiles.append(shot)
     
     for projectile in projectiles:
-        print(projectile)
         projectile.render(screen)
         projectile.move()
     # Projectile.move()
