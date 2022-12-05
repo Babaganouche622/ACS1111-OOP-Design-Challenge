@@ -18,9 +18,9 @@ class Player(Character):
         (can be obtained by calling pygame.key.get_pressed())
         '''
         if pressed_keys[pygame.K_LEFT]:
-            self.x -= self._move_speed
+            self._x -= self._move_speed
         if pressed_keys[pygame.K_RIGHT]:
-            self.x += self._move_speed
+            self._x += self._move_speed
 
     def heal(self, amount):
         '''

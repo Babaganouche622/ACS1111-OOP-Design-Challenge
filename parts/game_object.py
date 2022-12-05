@@ -8,18 +8,18 @@ class GameObject(pygame.sprite.Sprite):
     """
     def __init__(self, x, y, image, default_image_size):
         super(GameObject, self).__init__()
-        self.x = x
-        self.y = y
-        self.default_image_size = default_image_size
-        self.surf = pygame.transform.scale((pygame.image.load(image)), self.default_image_size)
-        self.rect = self.surf.get_rect()
+        self._x = x
+        self._y = y
+        self.__default_image_size = default_image_size
+        self._surf = pygame.transform.scale((pygame.image.load(image)), self.__default_image_size)
+        self._rect = self._surf.get_rect()
         
 
     def render(self, screen):
-        self.rect.x = self.x
-        self.rect.y = self.y
-        screen.blit(self.surf, (self.x, self.y))
+        self._rect.x = self._x
+        self._rect.y = self._y
+        screen.blit(self._surf, (self._x, self._y))
 
     def move(self, x, y):
-        self.x = x
-        self.y = y
+        self._x = x
+        self._y = y
